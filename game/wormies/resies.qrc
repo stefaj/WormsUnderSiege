@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ims">
+        <file>wormjetpack.png</file>
+        <file>wormbazooka.png</file>
+    </qresource>
+</RCC>
