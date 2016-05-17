@@ -11,20 +11,19 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),this,SLOT(Update()));
     timer->start(16);
 
-    player = new Entity(ui->spritePlayer->x(), ui->spritePlayer->y(),580, ui->spritePlayer->width(), ui->spritePlayer->height());
-    enemy= new Entity(ui->spriteEnemy->x(), ui->spriteEnemy->y(),580, ui->spriteEnemy->width(), ui->spriteEnemy->height());
+    player = new Worm(ui->spritePlayer->x(), ui->spritePlayer->y(),580, ui->spritePlayer->width(), ui->spritePlayer->height(), 0, this);
+    enemy= new Worm(ui->spriteEnemy->x(), ui->spriteEnemy->y(),580, ui->spriteEnemy->width(), ui->spriteEnemy->height(), 1, this);
 
     player->addVeloX(10);
+
+    manager.Add(player);
+    manager.Add(enemy);
 }
 
 void MainWindow::Update()
 {
-    player->Update();
-    enemy->Update();
-
-    ui->spriteEnemy->setGeometry((int)enemy->getX(),(int)enemy->getY(),ui->spriteEnemy->width(),ui->spriteEnemy->height());
-    ui->spritePlayer->setGeometry((int)player->getX(),(int)player->getY(),ui->spritePlayer->width(),ui->spritePlayer->height());
-
+    manager.Update(1.0/16.0);
+    manager.Draw();
 }
 
 void PlayerUpdate()

@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    entity.cpp
+    worm.cpp \
+    turnmanager.cpp
 
 HEADERS  += mainwindow.h \
-    entity.h
+    worm.h \
+    turnmanager.h
 
 FORMS    += mainwindow.ui
 

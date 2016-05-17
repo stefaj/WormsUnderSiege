@@ -3,17 +3,19 @@
 
 #include <QObject>
 #include <QRect>
+#include <QLabel>
+#include <QWidget>
 
-class Entity
+class Worm
 {
 public:
-    Entity(int x, int y, int maxY, int width, int height);
+    Worm(int x, int y, int maxY, int width, int height, int team, QWidget *parent);
     double getX();
     double getY();
     void Update();
     double addVeloX(double x);
     double addVeloY(double y);
-    bool Collides(Entity *other);
+    bool Collides(Worm *other);
 
 private:
        double x;
@@ -22,9 +24,11 @@ private:
        int height;
        double veloX;
        double veloY;
+       int team;
        bool facingLeft;
        int maxY;
        QRect boundingrect;
+       QLabel *sprite;
 };
 
 #endif // ENTITY_H

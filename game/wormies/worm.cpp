@@ -1,6 +1,6 @@
-#include "entity.h"
+#include "worm.h"
 
-Entity::Entity(int x, int y, int maxY, int width, int height)
+Worm::Worm(int x, int y, int maxY, int width, int height, int team, QWidget *parent)
 {
     this->x = x;
     this->y = y;
@@ -8,15 +8,18 @@ Entity::Entity(int x, int y, int maxY, int width, int height)
     this->veloX = 0;
     this->veloY = 0;
     this->width = width;
+    this->team = team;
     this->height = height;
+
+    this->sprite = new QLabel(parent);
 }
 
-bool Entity::Collides(Entity *other)
+bool Worm::Collides(Worm *other)
 {
     return this->boundingrect.intersects(other->boundingrect);
 }
 
-void Entity::Update()
+void Worm::Update()
 {
     this->x += this->veloX;
     this->y += this->veloY;
@@ -32,26 +35,30 @@ void Entity::Update()
     }
 
     boundingrect = QRect((int)x,(int)y,width,height);
+
+    // Draw
+
+    this->sprite->setGeometry(x,y,this->sprite->width(),this->sprite->height());
 }
 
-double Entity::addVeloX(double x)
+double Worm::addVeloX(double x)
 {
     this->veloX += x;
 }
 
-double Entity::addVeloY(double y)
+double Worm::addVeloY(double y)
 {
     this->veloY += y;
 }
 
 
-double Entity::getX()
+double Worm::getX()
 {
     return this->x;
 }
 
 
-double Entity::getY()
+double Worm::getY()
 {
     return this->y;
 }

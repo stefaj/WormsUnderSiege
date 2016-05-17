@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include <entity.h>
+#include <turnmanager.h>
+#include <worm.h>
 
 namespace Ui {
 class MainWindow;
@@ -20,8 +21,9 @@ public:
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
-    Entity *player;
-    Entity *enemy;
+    Worm *player;
+    Worm *enemy;
+    TurnManager manager;
 
 private slots:
     void Update();
