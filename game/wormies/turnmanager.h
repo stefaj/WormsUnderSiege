@@ -5,6 +5,7 @@
 #include "worm.h"
 #include <QKeyEvent>
 #include <QDebug>
+#include <QKeyEvent>
 
 class TurnManager
 {
@@ -13,6 +14,9 @@ public:
     void Draw();
     void Update(float elapsedSeconds);
     void Add(Worm *worm);
+
+    void keyPressed(QKeyEvent *e);
+    void keyRelease(QKeyEvent *e);
 
 private:
     QList<Worm*> worms;

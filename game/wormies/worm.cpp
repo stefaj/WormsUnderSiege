@@ -12,6 +12,11 @@ Worm::Worm(int x, int y, int maxY, int width, int height, int team, QWidget *par
     this->height = height;
 
     this->sprite = new QLabel(parent);
+    this->sprite->setGeometry(x,y,width,height);
+    QPixmap pixmap = QPixmap(":/ims/wormjetpack.png");
+    this->sprite->setPixmap(pixmap);
+    this->sprite->setScaledContents(true);
+
 }
 
 bool Worm::Collides(Worm *other)

@@ -5,6 +5,7 @@
 #include <QRect>
 #include <QLabel>
 #include <QWidget>
+#include <QPixmap>
 
 class Worm
 {

@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <turnmanager.h>
 #include <worm.h>
+#include <QKeyEvent>
+#include <QDebug>
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +29,10 @@ private:
 
 private slots:
     void Update();
+
+protected:
+    void keyPressEvent(QKeyEvent *e);
+    void keyReleaseEvent(QKeyEvent *e);
 };
 
 #endif // MAINWINDOW_H
