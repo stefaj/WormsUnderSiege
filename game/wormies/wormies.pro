@@ -31,3 +31,5 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     resies.qrc
+
+DISTFILES +=

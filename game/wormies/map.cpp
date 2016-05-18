@@ -15,7 +15,7 @@ namespace MapSingleton
 
 Map::Map(QWidget *parent)
 {
-    layer = QImage(":/ims/map01.bmp");
+    layer = QImage(":/ims/map01.png");
 
 
     sprite = new QLabel(parent);
