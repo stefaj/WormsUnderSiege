@@ -8,6 +8,7 @@
 #include <QPixmap>
 #include "gun.h"
 #include <QString>
+#include "wormstruct.h"
 
 class Worm
 {
@@ -28,6 +29,7 @@ public:
     Gun getGun();
     void shoot();
     QString getName();
+
 
 private:
        double x;

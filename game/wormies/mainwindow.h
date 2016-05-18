@@ -27,8 +27,6 @@ public:
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
-    Worm *player;
-    Worm *enemy;
     TurnManager *manager;
 
 private slots:

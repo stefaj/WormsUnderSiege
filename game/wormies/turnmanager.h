@@ -25,6 +25,7 @@ public:
     void setMouse(int x, int y);
     QVector<QPoint> calcBulletDest(int steps);
 
+
 signals:
     void WormChange(Worm *worm);
     void PlayerChange(int playerId);
