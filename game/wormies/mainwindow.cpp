@@ -12,13 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),this,SLOT(Update()));
     timer->start(16);
 
-    player = new Worm(10,20,580, 61, 70, 0, this);
-    enemy= new Worm(400, 60, 580, 61, 71, 1, this);
-
-    player->addVeloX(10);
-
-    manager.Add(player);
-    manager.Add(enemy);
+    Worm *a1 = new Worm(10,20,580, 61, 70, 0, this); manager.Add(a1);
+    Worm *a2 = new Worm(110,20,580, 61, 70, 0, this); manager.Add(a2);
+    Worm *b1 = new Worm(400, 60, 580, 61, 71, 1, this); manager.Add(b1);
+    Worm *b2 = new Worm(500, 60, 580, 61, 71, 1, this); manager.Add(b2);
 
     setFocusPolicy(Qt::StrongFocus);
     manager.setMouse(0, 0);
