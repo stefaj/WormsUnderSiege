@@ -1,6 +1,6 @@
 #include "worm.h"
 
-Worm::Worm(int x, int y, int maxY, int width, int height, int team, QWidget *parent)
+Worm::Worm(int x, int y, int maxY, int width, int height, int team, QString name, QWidget *parent)
 {
     this->x = x;
     this->y = y;
@@ -14,8 +14,13 @@ Worm::Worm(int x, int y, int maxY, int width, int height, int team, QWidget *par
     this->sprite = new QLabel(parent);
     this->sprite->setGeometry(x,y,width,height);
     QPixmap pixmap = QPixmap(":/ims/wormjetpack.png");
+    if(team == 1)
+        pixmap = QPixmap(":/ims/wormjetpackorange.png");
+
     this->sprite->setPixmap(pixmap);
     this->sprite->setScaledContents(true);
+
+    this->name = name;
 
 }
 double Worm::getAimX() {
@@ -94,5 +99,10 @@ int Worm::getWidth()
 int Worm::getHeight()
 {
     return height;
+}
+
+QString Worm::getName()
+{
+    return name;
 }
 

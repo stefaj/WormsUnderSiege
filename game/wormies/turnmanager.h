@@ -11,16 +11,24 @@
 #include <QPainter>
 #include <QPoint>
 #include <QVector>
+#include <QObject>
 
-class TurnManager
+class TurnManager : public QObject
 {
+    Q_OBJECT
+
 public:
-    TurnManager();
-    void Draw(QWidget *parent);
+    TurnManager(QWidget *parent);
+    void Draw();
     void Update(float elapsedSeconds);
     void Add(Worm *worm);
     void setMouse(int x, int y);
     QVector<QPoint> calcBulletDest(int steps);
+
+signals:
+    void WormChange(Worm *worm);
+    void PlayerChange(int playerId);
+
 private:
     QList<Worm*> worms;
     int activePlayer;

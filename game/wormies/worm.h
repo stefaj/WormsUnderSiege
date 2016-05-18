@@ -7,11 +7,12 @@
 #include <QWidget>
 #include <QPixmap>
 #include "gun.h"
+#include <QString>
 
 class Worm
 {
 public:
-    Worm(int x, int y, int maxY, int width, int height, int team, QWidget *parent);
+    Worm(int x, int y, int maxY, int width, int height, int team, QString name, QWidget *parent);
     double getX();
     double getY();
     double getAimX();
@@ -24,6 +25,7 @@ public:
     double addVeloY(double y);
     bool Collides(Worm *other);
     Gun getGun();
+    QString getName();
 
 private:
        double x;
@@ -37,6 +39,7 @@ private:
        int team;
        bool facingLeft;
        int maxY;
+       QString name;
        QRect boundingrect;
        QLabel *sprite;
 };

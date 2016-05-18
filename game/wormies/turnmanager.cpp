@@ -1,11 +1,13 @@
 #include "turnmanager.h"
 #include "keyboardmanager.h"
 #include <QtMath>
-TurnManager::TurnManager()
+#include <QObject>
+
+TurnManager::TurnManager(QWidget *parent) : QObject(parent)
 {
-
+    activePlayer = 0;
+    activeWorm = 0;
 }
-
 QVector<QPoint> TurnManager::calcBulletDest(int steps) {
   int i = activeWorm;
   double time_step = 1.0 / 2.0;
@@ -29,9 +31,9 @@ QVector<QPoint> TurnManager::calcBulletDest(int steps) {
   return current;
 }
 
-void TurnManager::Draw(QWidget * parent)
+void TurnManager::Draw()
 {
-  QPainter p(parent);
+  QPainter p((QWidget*)this->parent());
 
   int i = activeWorm;
    p.setRenderHint(QPainter::Antialiasing);
@@ -69,6 +71,11 @@ void TurnManager::Update(float elapsedSeconds)
             activeWorm = 0;
         qDebug() << "New active " << activeWorm;
         qDebug() << "count " << worms.count();
+
+        activePlayer = 1 - activePlayer;
+
+        emit PlayerChange(activePlayer);
+        emit WormChange(worms[activeWorm]);
 
     }
 
