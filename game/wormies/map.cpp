@@ -37,8 +37,11 @@ void Map::Explode(int x, int y, double radius)
     {
         for(int j = y-radius;j<y+radius;j++)
         {
-            QColor col = QColor(0,0,0,0);
-            layer.setPixel(i,j,col.rgba());
+            if( (i-x)*(i-x) + (j-y)*(j-y) < radius*radius)
+            {
+                QColor col = QColor(0,0,0,0);
+                layer.setPixel(i,j,col.rgba());
+            }
         }
     }
 

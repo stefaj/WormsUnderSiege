@@ -52,6 +52,7 @@ bool Gun::shoot(double time, Worm *worm) {
 
     QPoint result = QPoint(static_cast<int>(x_n), static_cast<int>(y_n));
 
+
     QRect rect(result.x()-25,result.y()-25,50,50);
     if(!MapSingleton::map->ManageBulletCollision(rect,this->radius))
     {

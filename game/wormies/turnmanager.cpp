@@ -36,12 +36,12 @@ void TurnManager::Draw()
   QPainter p((QWidget*)this->parent());
 
   int i = activeWorm;
-   p.setRenderHint(QPainter::Antialiasing);
-   p.setPen(QPen(Qt::black, 12, Qt::DotLine, Qt::RoundCap));
-   QVector<QPoint> bullets = calcBulletDest(500);
-   for (int g = 0; g < bullets.count(); g++)
-   p.drawPoint(bullets.value(g));
-   p.end();
+  p.setRenderHint(QPainter::Antialiasing);
+  p.setPen(QPen(Qt::black, 12, Qt::DotLine, Qt::RoundCap));
+  QVector<QPoint> bullets = calcBulletDest(500);
+  for (int g = 0; g < bullets.count(); g++)
+  p.drawPoint(bullets.value(g));
+  p.end();
 
 }
 
@@ -54,8 +54,9 @@ void TurnManager::Update(float elapsedSeconds)
 {
     for(int i = 0; i < worms.count(); i++) {
         worms[i]->setAim(this->mouse_x, this->mouse_y);
-        worms[i]->Update();
+        worms[i]->Update(elapsedSeconds);
     }
+    worms[activeWorm]->UpdateMain(elapsedSeconds);
 
     roundTimer -= elapsedSeconds;
 

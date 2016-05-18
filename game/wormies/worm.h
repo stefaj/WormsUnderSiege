@@ -19,7 +19,8 @@ public:
     double getAimY();
     int getWidth();
     int getHeight();
-    void Update();
+    void Update(float elapsedSeconds);
+    void UpdateMain(float elapsedSeconds);
     void setAim(int x, int y);
     double addVeloX(double x);
     double addVeloY(double y);

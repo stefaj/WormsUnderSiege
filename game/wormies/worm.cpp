@@ -49,13 +49,19 @@ void Worm::setAim(int x, int y) {
   this->aimY = static_cast<double>(y);
 }
 
-void Worm::Update()
+// Only update active worm stuff here
+void Worm::UpdateMain(float elapsedSeconds)
 {
     dt += 1.0 / 5.0;
     if(gun->shoot(dt, this))
     {
         dt = 0;
     }
+}
+
+void Worm::Update(float elapsedSeconds)
+{
+
 
     double xp = this->x; double yp = this->y;
 
