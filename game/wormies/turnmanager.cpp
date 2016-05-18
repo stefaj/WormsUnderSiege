@@ -1,4 +1,5 @@
 #include "turnmanager.h"
+#include "keyboardmanager.h"
 
 TurnManager::TurnManager()
 {
@@ -32,6 +33,28 @@ void TurnManager::Update(float elapsedSeconds)
 
     }
 
+    //qDebug() << "Key left down " <<  KeyboardManager::IsKeyDown(Qt::Key_Left);
+   // qDebug() << "Key up down " << KeyboardManager::keys[Qt::Key_Up];
+
+    if( KeyboardManager::IsKeyDown(Qt::Key_Left))
+    {
+        qDebug() << "Left";
+        worms[activeWorm]->addVeloX(-1);
+    }
+    if( KeyboardManager::IsKeyDown(Qt::Key_Right))
+    {
+        qDebug() << "Right";
+        worms[activeWorm]->addVeloX(1);
+    }
+    if( KeyboardManager::IsKeyDown(Qt::Key_Up))
+    {
+        worms[activeWorm]->addVeloY(-2);
+    }
+    if( KeyboardManager::IsKeyDown(Qt::Key_Down))
+    {
+        worms[activeWorm]->addVeloY(1);
+    }
+
     // handle input of active worm
 }
 
@@ -41,29 +64,3 @@ void TurnManager::Add(Worm *worm)
     this->worms.push_back(worm);
 }
 
-void TurnManager::keyPressed(QKeyEvent *e)
-{
-    if(e->key() == Qt::Key_Left)
-    {
-        qDebug() << "Left";
-        worms[activeWorm]->addVeloX(-1);
-    }
-    if(e->key() == Qt::Key_Right)
-    {
-        qDebug() << "Right";
-        worms[activeWorm]->addVeloX(1);
-    }
-    if(e->key() == Qt::Key_Up)
-    {
-        worms[activeWorm]->addVeloY(-2);
-    }
-    if(e->key() == Qt::Key_Down)
-    {
-        worms[activeWorm]->addVeloY(1);
-    }
-}
-
-void TurnManager::keyRelease(QKeyEvent *e)
-{
-
-}

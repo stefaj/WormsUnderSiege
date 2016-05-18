@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QTimer>
+#include "keyboardmanager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,23 +19,28 @@ MainWindow::MainWindow(QWidget *parent) :
 
     manager.Add(player);
     manager.Add(enemy);
+
+    setFocusPolicy(Qt::StrongFocus);
+
 }
 
 void MainWindow::Update()
 {
     manager.Update(1.0/16.0);
     manager.Draw();
+
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
-    manager.keyPressed(e);
+    KeyboardManager::KeyPress(e);
+
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *e)
 {
+    KeyboardManager::KeyRelease(e);
 
-    manager.keyRelease(e);
 }
 
 void PlayerUpdate()

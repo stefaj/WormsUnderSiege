@@ -7,6 +7,7 @@
 #include <worm.h>
 #include <QKeyEvent>
 #include <QDebug>
+#include <QMap>
 
 namespace Ui {
 class MainWindow;

@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     worm.cpp \
-    turnmanager.cpp
+    turnmanager.cpp \
+    keyboardmanager.cpp
 
 HEADERS  += mainwindow.h \
     worm.h \
-    turnmanager.h
+    turnmanager.h \
+    keyboardmanager.h
 
 FORMS    += mainwindow.ui
 
