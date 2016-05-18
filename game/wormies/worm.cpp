@@ -18,10 +18,22 @@ Worm::Worm(int x, int y, int maxY, int width, int height, int team, QWidget *par
     this->sprite->setScaledContents(true);
 
 }
+double Worm::getAimX() {
+  return this->aimX;
+}
+
+double Worm::getAimY() {
+  return this->aimY;
+}
 
 bool Worm::Collides(Worm *other)
 {
     return this->boundingrect.intersects(other->boundingrect);
+}
+
+void Worm::setAim(int x, int y) {
+  this->aimX = static_cast<double>(x);
+  this->aimY = static_cast<double>(y);
 }
 
 void Worm::Update()
@@ -43,7 +55,8 @@ void Worm::Update()
 
     // Draw
 
-    this->sprite->setGeometry(x,y,this->sprite->width(),this->sprite->height());
+    this->sprite->setGeometry(x, y, this->sprite->width(),this->sprite->height());
+
 }
 
 double Worm::addVeloX(double x)
