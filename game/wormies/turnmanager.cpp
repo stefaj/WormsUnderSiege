@@ -1,9 +1,32 @@
 #include "turnmanager.h"
 #include "keyboardmanager.h"
-
+#include <QtMath>
 TurnManager::TurnManager()
 {
 
+}
+
+QVector<QPoint> TurnManager::calcBulletDest(int steps) {
+  int i = activeWorm;
+  double time_step = 1.0 / 2.0;
+  double gravity = 9.8;
+  double dx_init = worms[i]->getX() + worms[i]->getWidth() / 2.0;
+  double dy_init = worms[i]->getY() + worms[i]->getHeight() / 2.0;
+  double x_sq = pow(worms[i]->getAimX() - dx_init, 2);
+  double y_sq = pow(worms[i]->getAimY() - dy_init, 2);
+  double dist = pow(x_sq + y_sq, 0.5);
+  double v_0 = (worms[i]->getGun().getRange()) * dist / worms[i]->getGun().getMass() / 25;
+  QVector<QPoint> current;
+  for (int z = 0; z < steps; z++) {
+      double t = z * time_step;
+
+      double x_0 = v_0 * (worms[i]->getAimX() - dx_init) / dist;
+      double x_n =  t * x_0 + dx_init;
+      double y_0 = v_0 * (worms[i]->getAimY() - dy_init) / dist;
+      double y_n =  t * y_0 + 0.5 * gravity * t * t + dy_init;
+      current.push_back(QPoint(static_cast<int>(x_n), static_cast<int>(y_n)));
+  }
+  return current;
 }
 
 void TurnManager::Draw(QWidget * parent)
@@ -11,16 +34,13 @@ void TurnManager::Draw(QWidget * parent)
   QPainter p(parent);
 
   int i = activeWorm;
+   p.setRenderHint(QPainter::Antialiasing);
+   p.setPen(QPen(Qt::black, 12, Qt::DotLine, Qt::RoundCap));
+   QVector<QPoint> bullets = calcBulletDest(500);
+   for (int g = 0; g < bullets.count(); g++)
+   p.drawPoint(bullets.value(g));
+   p.end();
 
-    p.setRenderHint(QPainter::Antialiasing);
-    p.setPen(QPen(Qt::black, 12, Qt::DotLine, Qt::RoundCap));
-    p.drawLine(static_cast<int>(worms[i]->getX() + worms[i]->getWidth() / 2),
-               static_cast<int>(worms[i]->getY() + worms[i]->getHeight() / 2),
-               static_cast<int>(worms[i]->getAimX()),
-               static_cast<int>(worms[i]->getAimY()));
-
-
-  p.end();
 }
 
 void TurnManager::setMouse(int x, int y) {

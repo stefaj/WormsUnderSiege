@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     worm.cpp \
     turnmanager.cpp \
-    keyboardmanager.cpp
+    keyboardmanager.cpp \
+    gun.cpp
 
 HEADERS  += mainwindow.h \
     worm.h \
     turnmanager.h \
-    keyboardmanager.h
+    keyboardmanager.h \
+    gun.h
 
 FORMS    += mainwindow.ui
 

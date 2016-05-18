@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QWidget>
 #include <QPixmap>
+#include "gun.h"
 
 class Worm
 {
@@ -22,6 +23,7 @@ public:
     double addVeloX(double x);
     double addVeloY(double y);
     bool Collides(Worm *other);
+    Gun getGun();
 
 private:
        double x;

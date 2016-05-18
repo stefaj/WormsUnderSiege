@@ -9,6 +9,8 @@
 #include <QKeyEvent>
 #include <QPicture>
 #include <QPainter>
+#include <QPoint>
+#include <QVector>
 
 class TurnManager
 {
@@ -17,11 +19,8 @@ public:
     void Draw(QWidget *parent);
     void Update(float elapsedSeconds);
     void Add(Worm *worm);
-
     void setMouse(int x, int y);
-
-
-
+    QVector<QPoint> calcBulletDest(int steps);
 private:
     QList<Worm*> worms;
     int activePlayer;

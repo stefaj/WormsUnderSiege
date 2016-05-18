@@ -26,6 +26,11 @@ double Worm::getAimY() {
   return this->aimY;
 }
 
+Gun Worm::getGun() {
+    Gun test_gun(10, 1, 3, 1.0, 0.5);
+    return test_gun;
+}
+
 bool Worm::Collides(Worm *other)
 {
     return this->boundingrect.intersects(other->boundingrect);
