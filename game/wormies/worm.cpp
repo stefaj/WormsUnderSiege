@@ -1,4 +1,5 @@
 #include "worm.h"
+#include "map.h"
 
 Worm::Worm(int x, int y, int maxY, int width, int height, int team, QString name, QWidget *parent)
 {
@@ -69,8 +70,8 @@ void Worm::Update()
     boundingrect = QRect((int)x,(int)y,width,height);
 
     // Draw
-
-    this->sprite->setGeometry(x, y, this->sprite->width(),this->sprite->height());
+    if(MapSingleton::map->IsPassible(x,y))
+        this->sprite->setGeometry(x, y, this->sprite->width(),this->sprite->height());
 
 }
 

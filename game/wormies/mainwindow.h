@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include <QMap>
+#include "map.h"
 
 namespace Ui {
 class MainWindow;
