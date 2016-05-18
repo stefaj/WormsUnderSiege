@@ -26,7 +26,6 @@ Map::Map(QWidget *parent)
 
 bool Map::IsPassible(int x, int y)
 {
-    QColor black(0,0,0);
     qDebug() << black.rgba();
     qDebug() << this->layer.pixel(x,y);
     return this->layer.pixel(x,y) != black.rgba();
@@ -35,10 +34,109 @@ bool Map::IsPassible(int x, int y)
  bool Map::IsPassible(QRect rect)
  {
 
-     for(int i = rect.left(); i < rect.right(); i++)
+     //bottom
+     for(int x = rect.left(); x < rect.right(); x++)
      {
-     //    if(layer.pixel(i,rect.bottom()))
+         if(isBlack(x,rect.bottom()))
+             return false;
+     }
+     //top
+     for(int x = rect.left(); x < rect.right(); x++)
+     {
+         if(isBlack(x,rect.top()))
+             return false;
+     }\
+     //left
+     for(int y = rect.top(); y < rect.bottom(); y++)
+     {
+         if(isBlack(rect.left(),y))
+             return false;
+     }
+     //right
+     for(int y = rect.top(); y < rect.bottom(); y++)
+     {
+         if(isBlack(rect.right(),y))
+             return false;
      }
 
-     return false;
+     return true;
+ }
+
+ bool Map::ManageCollision(QRect rect, double * xvel, double * yvel, double * x, double * y, double prevX, double prevY)
+ {
+     bool notCollide = true;
+
+
+     //bottom
+     for(int x = rect.left()+2; x < rect.right()-2; x+=2)
+     {
+
+         if(isBlack(x,rect.bottom()))
+         {
+             if(*yvel > 0)
+             {
+                 *yvel = -0.1;
+                 *y = prevY-0.1;
+             }
+
+             notCollide = false;
+         }
+     }
+
+     //left
+     for(int y = rect.top()+2; y < rect.bottom()-2; y+=2)
+     {
+
+         if(isBlack(rect.left(),y))
+         {
+             if(*xvel < 0)
+             {
+                 *xvel = 0;
+                 *x = prevX+0.1;
+             }
+             notCollide = false;
+         }
+     }
+     //right
+     for(int y = rect.top()+2; y < rect.bottom()-2; y+=2)
+     {
+
+         if(isBlack(rect.right(),y))
+         {
+             if(*xvel > 0)
+             {
+                 *xvel = 0;
+                 *x = prevX-0.1;
+             }
+            notCollide = false;
+         }
+     }
+
+
+
+     //top
+     for(int x = rect.left()+2; x < rect.right()-2; x+=2)
+     {
+
+         if(isBlack(x,rect.top()))
+         {
+             if(*yvel < 0)
+             {
+                 *yvel = 0.1;
+                 *y = prevY+0.1;
+             }
+             return false;
+             notCollide = false;
+         }
+     }\
+
+
+
+     return notCollide;
+ }
+
+ bool Map::isBlack(int x, int y)
+ {
+
+     return this->layer.pixel(x,y) == black.rgba();
  }

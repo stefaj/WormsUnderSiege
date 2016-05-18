@@ -12,7 +12,7 @@
 class Worm
 {
 public:
-    Worm(int x, int y, int maxY, int width, int height, int team, QString name, QWidget *parent);
+    Worm(int x, int y, int width, int height, int team, QString name, QWidget *parent);
     double getX();
     double getY();
     double getAimX();

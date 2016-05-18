@@ -1,11 +1,10 @@
 #include "worm.h"
 #include "map.h"
 
-Worm::Worm(int x, int y, int maxY, int width, int height, int team, QString name, QWidget *parent)
+Worm::Worm(int x, int y, int width, int height, int team, QString name, QWidget *parent)
 {
     this->x = x;
     this->y = y;
-    this->maxY = maxY;
     this->veloX = 0;
     this->veloY = 0;
     this->dt = 0.0;
@@ -54,29 +53,42 @@ void Worm::Update()
 {
     dt += 1.0 / 5.0;
     gun->shoot(dt, this);
-    this->x += this->veloX;
-    this->y += this->veloY;
+
+    double xp = this->x; double yp = this->y;
+
+    xp += this->veloX;
+    yp += this->veloY;
 
     this->veloX *= 0.95;
     this->veloY *= 0.95;
     this->veloY += 0.4;
 
-    if(this->y > maxY)
+    boundingrect = QRect((int)xp,(int)yp,width,height);
+
+
+    if(MapSingleton::map->ManageCollision(boundingrect,&veloX,&veloY,&xp,&yp,this->x,this->y))
     {
-        this->y = maxY;
-        this->veloY = 0;
+
     }
 
-    boundingrect = QRect((int)x,(int)y,width,height);
+    this->x = xp;
+    this->y = yp;
 
-    // Draw
-    if(MapSingleton::map->IsPassible(x,y))
-        this->sprite->setGeometry(x, y, this->sprite->width(),this->sprite->height());
-    else
-    {
-        this->veloX = 0;
-        this->veloY = 0;
-    }
+//     if(MapSingleton::map->IsPassible(boundingrect))
+//     {
+//         this->x = xp;
+//         this->y = yp;
+//     }
+//     else
+//     {
+//        //this->veloX = 0;
+//        //this->veloY = 0;
+//    }
+
+
+
+    this->sprite->setGeometry(x, y, this->sprite->width(),this->sprite->height());
+
 
 }
 

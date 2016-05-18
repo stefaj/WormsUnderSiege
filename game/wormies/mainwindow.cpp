@@ -16,19 +16,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),this,SLOT(Update()));
     timer->start(16);
 
-    Worm *a1 = new Worm(10,20,620, 61, 70, 0, "John", this); manager->Add(a1);
-    Worm *a2 = new Worm(110,20,620, 61, 70, 0, "Sansa", this); manager->Add(a2);
-    Worm *b1 = new Worm(400, 60, 620, 61, 71, 1, "Ned", this); manager->Add(b1);
-    Worm *b2 = new Worm(500, 60, 620, 61, 71, 1, "Rob", this); manager->Add(b2);
+    Worm *a1 = new Worm(10,20, 61, 70, 0, "John", this); manager->Add(a1);
+    Worm *a2 = new Worm(110,20, 61, 70, 0, "Sansa", this); manager->Add(a2);
+   // Worm *b1 = new Worm(400, 60, 620, 61, 71, 1, "Ned", this); manager->Add(b1);
+  //  Worm *b2 = new Worm(500, 60, 620, 61, 71, 1, "Rob", this); manager->Add(b2);
 
     setFocusPolicy(Qt::StrongFocus);
     manager->setMouse(0, 0);
     setMouseTracking(true);
 
-
     connect(manager,SIGNAL(WormChange(Worm*)),this,SLOT(OnWormChange(Worm*)));
     connect(manager,SIGNAL(PlayerChange(int)),this,SLOT(OnPlayerChange(int)));
-
 
 }
 
