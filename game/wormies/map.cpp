@@ -1,6 +1,7 @@
 #include "map.h"
 #include <QRgb>
-
+#include <QDebug>
+#include <QColor>
 
 namespace MapSingleton
 {
@@ -25,6 +26,19 @@ Map::Map(QWidget *parent)
 
 bool Map::IsPassible(int x, int y)
 {
-    return this->layer.pixel(x,y) != 0;
+    QColor black(0,0,0);
+    qDebug() << black.rgba();
+    qDebug() << this->layer.pixel(x,y);
+    return this->layer.pixel(x,y) != black.rgba();
 }
 
+ bool Map::IsPassible(QRect rect)
+ {
+
+     for(int i = rect.left(); i < rect.right(); i++)
+     {
+     //    if(layer.pixel(i,rect.bottom()))
+     }
+
+     return false;
+ }

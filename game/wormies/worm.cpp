@@ -67,6 +67,11 @@ void Worm::Update()
     // Draw
     if(MapSingleton::map->IsPassible(x,y))
         this->sprite->setGeometry(x, y, this->sprite->width(),this->sprite->height());
+    else
+    {
+        this->veloX = 0;
+        this->veloY = 0;
+    }
 
 }
 
