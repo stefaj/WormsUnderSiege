@@ -9,18 +9,23 @@
 #include <QKeyEvent>
 #include <QPicture>
 #include <QPainter>
+#include <QObject>
 
-class TurnManager
+class TurnManager : public QObject
 {
+    Q_OBJECT
+
 public:
-    TurnManager();
-    void Draw(QWidget *parent);
+    TurnManager(QWidget *parent);
+    void Draw();
     void Update(float elapsedSeconds);
     void Add(Worm *worm);
 
     void setMouse(int x, int y);
 
-
+signals:
+    void WormChange(Worm *worm);
+    void PlayerChange(int playerId);
 
 private:
     QList<Worm*> worms;

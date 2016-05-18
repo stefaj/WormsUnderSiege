@@ -1,14 +1,16 @@
 #include "turnmanager.h"
 #include "keyboardmanager.h"
+#include <QObject>
 
-TurnManager::TurnManager()
+TurnManager::TurnManager(QWidget *parent) : QObject(parent)
 {
-
+    activePlayer = 0;
+    activeWorm = 0;
 }
 
-void TurnManager::Draw(QWidget * parent)
+void TurnManager::Draw()
 {
-  QPainter p(parent);
+  QPainter p((QWidget*)this->parent());
 
   int i = activeWorm;
 
@@ -49,6 +51,11 @@ void TurnManager::Update(float elapsedSeconds)
             activeWorm = 0;
         qDebug() << "New active " << activeWorm;
         qDebug() << "count " << worms.count();
+
+        activePlayer = 1 - activePlayer;
+
+        emit PlayerChange(activePlayer);
+        emit WormChange(worms[activeWorm]);
 
     }
 

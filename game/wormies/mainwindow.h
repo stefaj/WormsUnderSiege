@@ -22,15 +22,18 @@ public:
     ~MainWindow();
     void paintEvent(QPaintEvent *);
     void mouseMoveEvent(QMouseEvent *);
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
     Worm *player;
     Worm *enemy;
-    TurnManager manager;
+    TurnManager *manager;
 
 private slots:
     void Update();
+    void OnWormChange(Worm *worm);
+    void OnPlayerChange(int playerId);
 
 protected:
     void keyPressEvent(QKeyEvent *e);
