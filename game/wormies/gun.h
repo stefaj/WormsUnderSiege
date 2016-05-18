@@ -14,11 +14,12 @@ public:
     double getRange();
     double getAccuracy();
     double getMass();
-    void shoot(double time, Worm *worm);
+    bool shoot(double time, Worm *worm);
 private:
     unsigned int bullets;
     double power;
     double range;
+    double radius;
     double accuracy;
     double bullets_mass;
     QLabel *bullet_sprite;

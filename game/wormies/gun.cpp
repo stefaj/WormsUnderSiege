@@ -1,6 +1,7 @@
 #include "gun.h"
 #include "worm.h"
 #include <QtMath>
+#include "map.h"
 
 Gun::Gun(unsigned int bullets, double power, double range, double accuracy, double bullets_mass, QWidget *parent)
 {
@@ -15,6 +16,7 @@ Gun::Gun(unsigned int bullets, double power, double range, double accuracy, doub
   QPixmap pixmap = QPixmap(":/ims/wormjetpack.png");
   this->bullet_sprite->setPixmap(pixmap);
   this->bullet_sprite->setScaledContents(true);
+  this->radius = 20;
 
 }
 double Gun::getDamage() {
@@ -33,7 +35,7 @@ double Gun::getMass() {
   return this->bullets_mass;
 }
 
-void Gun::shoot(double time, Worm *worm) {
+bool Gun::shoot(double time, Worm *worm) {
     double time_step = 1.0 / 2.0;
     double gravity = 9.8;
     double dx_init = worm->getX() + worm->getWidth() / 2.0;
@@ -50,9 +52,20 @@ void Gun::shoot(double time, Worm *worm) {
 
     QPoint result = QPoint(static_cast<int>(x_n), static_cast<int>(y_n));
 
+    QRect rect(result.x()-25,result.y()-25,50,50);
+    if(!MapSingleton::map->ManageBulletCollision(rect,this->radius))
+    {
+        this->bullet_sprite->hide();
+        return true;
+    }
+    else
+    {
+        this->bullet_sprite->setGeometry(result.x() -25, result.y() -25, 50, 50);
+        this->bullet_sprite->show();
+    }
+    return false;
 
-  this->bullet_sprite->setGeometry(result.x() -25, result.y() -25, 50, 50);
-  this->bullet_sprite->show();
+
 }
 
 Gun::~Gun() {

@@ -52,7 +52,10 @@ void Worm::setAim(int x, int y) {
 void Worm::Update()
 {
     dt += 1.0 / 5.0;
-    gun->shoot(dt, this);
+    if(gun->shoot(dt, this))
+    {
+        dt = 0;
+    }
 
     double xp = this->x; double yp = this->y;
 
