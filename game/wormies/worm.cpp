@@ -7,10 +7,11 @@ Worm::Worm(int x, int y, int maxY, int width, int height, int team, QString name
     this->maxY = maxY;
     this->veloX = 0;
     this->veloY = 0;
+    this->dt = 0.0;
     this->width = width;
     this->team = team;
     this->height = height;
-
+    this->gun = new Gun(10, 1, 3, 1.0, 0.5, parent);
     this->sprite = new QLabel(parent);
     this->sprite->setGeometry(x,y,width,height);
     QPixmap pixmap = QPixmap(":/ims/wormjetpack.png");
@@ -21,7 +22,6 @@ Worm::Worm(int x, int y, int maxY, int width, int height, int team, QString name
     this->sprite->setScaledContents(true);
 
     this->name = name;
-
 }
 double Worm::getAimX() {
   return this->aimX;
@@ -31,9 +31,12 @@ double Worm::getAimY() {
   return this->aimY;
 }
 
+void Worm::shoot() {
+  dt = 0;
+}
+
 Gun Worm::getGun() {
-    Gun test_gun(10, 1, 3, 1.0, 0.5);
-    return test_gun;
+    return *gun;
 }
 
 bool Worm::Collides(Worm *other)
@@ -48,6 +51,8 @@ void Worm::setAim(int x, int y) {
 
 void Worm::Update()
 {
+    dt += 1.0 / 5.0;
+    gun->shoot(dt, this);
     this->x += this->veloX;
     this->y += this->veloY;
 
@@ -78,7 +83,6 @@ double Worm::addVeloY(double y)
 {
     this->veloY += y;
 }
-
 
 double Worm::getX()
 {

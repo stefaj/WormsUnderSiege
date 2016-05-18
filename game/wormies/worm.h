@@ -25,6 +25,7 @@ public:
     double addVeloY(double y);
     bool Collides(Worm *other);
     Gun getGun();
+    void shoot();
     QString getName();
 
 private:
@@ -36,12 +37,14 @@ private:
        double veloY;
        double aimX;
        double aimY;
+       double dt;
        int team;
        bool facingLeft;
        int maxY;
        QString name;
        QRect boundingrect;
        QLabel *sprite;
+       Gun * gun;
 };
 
 #endif // ENTITY_H

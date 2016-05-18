@@ -8,6 +8,7 @@ TurnManager::TurnManager(QWidget *parent) : QObject(parent)
     activePlayer = 0;
     activeWorm = 0;
 }
+
 QVector<QPoint> TurnManager::calcBulletDest(int steps) {
   int i = activeWorm;
   double time_step = 1.0 / 2.0;
@@ -21,7 +22,6 @@ QVector<QPoint> TurnManager::calcBulletDest(int steps) {
   QVector<QPoint> current;
   for (int z = 0; z < steps; z++) {
       double t = z * time_step;
-
       double x_0 = v_0 * (worms[i]->getAimX() - dx_init) / dist;
       double x_n =  t * x_0 + dx_init;
       double y_0 = v_0 * (worms[i]->getAimY() - dy_init) / dist;
@@ -99,6 +99,11 @@ void TurnManager::Update(float elapsedSeconds)
     if( KeyboardManager::IsKeyDown(Qt::Key_Down))
     {
         worms[activeWorm]->addVeloY(1);
+    }
+    if( KeyboardManager::IsKeyDown(Qt::Key_Space))
+    {
+        worms[activeWorm]->shoot();
+       // roundTimer = 0;
     }
 
     // handle input of active worm
