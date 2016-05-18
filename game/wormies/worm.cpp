@@ -7,7 +7,7 @@ Worm::Worm(int x, int y, int width, int height, int team, QString name, QWidget 
     this->y = y;
     this->veloX = 0;
     this->veloY = 0;
-    this->dt = 0.0;
+    this->dt = 10000.0; // ofscreen hack
     this->width = width;
     this->team = team;
     this->height = height;
@@ -55,7 +55,7 @@ void Worm::UpdateMain(float elapsedSeconds)
     dt += 1.0 / 5.0;
     if(gun->shoot(dt, this))
     {
-        dt = 0;
+        dt = 40000;
     }
 }
 

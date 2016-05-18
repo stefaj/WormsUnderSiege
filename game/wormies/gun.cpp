@@ -12,11 +12,11 @@ Gun::Gun(unsigned int bullets, double power, double range, double accuracy, doub
   this->bullets_mass = bullets_mass;
 
   this->bullet_sprite = new QLabel(parent);
-  this->bullet_sprite->setGeometry(50, 50, 50, 50);
+  this->bullet_sprite->setGeometry(-50, -50, 32, 32);
   QPixmap pixmap = QPixmap(":/ims/grenade.png");
   this->bullet_sprite->setPixmap(pixmap);
   this->bullet_sprite->setScaledContents(true);
-  this->radius = 20;
+  this->radius = 40;
 
 }
 double Gun::getDamage() {
@@ -36,7 +36,7 @@ double Gun::getMass() {
 }
 
 bool Gun::shoot(double time, Worm *worm) {
-    double time_step = 1.0 / 2.0;
+    double time_step = 1.0 / 3.0;
     double gravity = 9.8;
     double dx_init = worm->getX() + worm->getWidth() / 2.0;
     double dy_init = worm->getY() + worm->getHeight() / 2.0;
@@ -61,7 +61,7 @@ bool Gun::shoot(double time, Worm *worm) {
     }
     else
     {
-        this->bullet_sprite->setGeometry(result.x() -25, result.y() -25, 50, 50);
+        this->bullet_sprite->setGeometry(result.x() - this->bullet_sprite->width()/2, result.y() -this->bullet_sprite->height()/2, this->bullet_sprite->width(), this->bullet_sprite->height());
         this->bullet_sprite->show();
     }
     return false;

@@ -52,12 +52,15 @@ void Map::Explode(int x, int y, double radius)
 bool Map::ManageBulletCollision(QRect rect, double radius)
 {
 
+    if(rect.center().x() > 1024 || rect.center().x() < 0 || rect.center().y() > 768 || rect.center().y() < 0)
+        return true;
+
     //bottom
     for(int x = rect.left(); x < rect.right(); x++)
     {
         if(isBlack(x,rect.bottom()))
         {
-            Explode(x,rect.bottom(),radius);
+            Explode(rect.center().x(),rect.bottom(),radius);
             return false;
         }
     }
@@ -66,7 +69,7 @@ bool Map::ManageBulletCollision(QRect rect, double radius)
     {
         if(isBlack(x,rect.top()))
         {
-            Explode(x,rect.top(),radius);
+            Explode(rect.center().x(),rect.top(),radius);
             return false;
         }
     }\
@@ -75,7 +78,7 @@ bool Map::ManageBulletCollision(QRect rect, double radius)
     {
         if(isBlack(rect.left(),y))
         {
-            Explode(rect.left(),y,radius);
+            Explode(rect.left(),rect.center().y(),radius);
             return false;
         }
     }
@@ -84,7 +87,7 @@ bool Map::ManageBulletCollision(QRect rect, double radius)
     {
         if(isBlack(rect.right(),y))
         {
-            Explode(rect.right(), y,radius);
+            Explode(rect.right(),rect.center().y(),radius);
             return false;
         }
     }
@@ -94,6 +97,8 @@ bool Map::ManageBulletCollision(QRect rect, double radius)
 
 bool Map::IsPassible(QRect rect)
 {
+    if(rect.center().x() > 1024 || rect.center().x() < 0 || rect.center().y() > 768 || rect.center().y() < 0)
+        return true;
 
      //bottom
      for(int x = rect.left(); x < rect.right(); x++)
@@ -125,6 +130,9 @@ bool Map::IsPassible(QRect rect)
 
 bool Map::ManageCollision(QRect rect, double * xvel, double * yvel, double * x, double * y, double prevX, double prevY)
 {
+    if(rect.center().x() > 1024 || rect.center().x() < 0 || rect.center().y() > 768 || rect.center().y() < 0)
+        return true;
+
      bool notCollide = true;
 
 
