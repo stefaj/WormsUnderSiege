@@ -4,5 +4,7 @@
         <file>wormbazooka.png</file>
         <file>wormjetpackorange.png</file>
         <file>map01.png</file>
+        <file>grenade.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

@@ -13,7 +13,7 @@ Gun::Gun(unsigned int bullets, double power, double range, double accuracy, doub
 
   this->bullet_sprite = new QLabel(parent);
   this->bullet_sprite->setGeometry(50, 50, 50, 50);
-  QPixmap pixmap = QPixmap(":/ims/wormjetpack.png");
+  QPixmap pixmap = QPixmap(":/ims/grenade.png");
   this->bullet_sprite->setPixmap(pixmap);
   this->bullet_sprite->setScaledContents(true);
   this->radius = 20;
