@@ -6,8 +6,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    //MainWindow w;
-    MultiplayerTest w;
+    MainWindow w;
+    //MultiplayerTest w;
 
     w.show();
 
